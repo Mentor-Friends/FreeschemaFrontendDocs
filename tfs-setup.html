@@ -1,0 +1,227 @@
+<p>[toc]</p>
+<p><a href="#installation">Installation</a></p>
+<p><a href="#%20Lifecycle">Lifecycle</a></p>
+<p><a href="#Login">Login</a></p>
+<h2 id="create">Create</h2>
+<p>To Create inside of a widget system you have to first create an html
+for the form.</p>
+<pre><code>import { StatefulWidget } from &quot;../../default/StatefulWidget&quot;;
+
+export class create extends StatefulWidget{
+
+    /**
+     * Since there is no other data to be fetched then we just render after the component           has been mounted.
+     * If there was certain data you want to populate then you would put it here.
+     */
+    widgetDidMount(): void {
+
+        this.render();
+    }
+
+
+
+
+
+    /**
+     * This is the main html component of our creating widget.
+     * @returns returns a form that takes in name and number for the phone book.
+     */
+    async getHtml(): Promise&lt;string&gt; {
+        let html = &quot;&quot;;
+        html = `&lt;div&gt;
+        &lt;form&gt;
+            &lt;div&gt;
+                &lt;input type= number id=id hidden&gt;
+                &lt;input type = text id=&quot;name&quot; placeholder=&quot;name&quot;&gt;
+                &lt;input type = number id=&quot;phone&quot; placeholder=&quot;phone&quot;&gt;
+                &lt;button id=&quot;submit&quot; type=submit&gt;Submit&lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/form&gt;
+
+        &lt;/div&gt;`
+        return html;
+    }
+}</code></pre>
+<p>You also need to add the route for this in your routes.ts inside your
+RouteParams array.</p>
+<pre><code>  {
+    path: &quot;/example&quot;,
+    linkLabel: &quot;Example&quot;,
+    content: create,
+  },</code></pre>
+<p>After this you can start the server using npm run dev which will
+start your server (for eg: localhost:5173)</p>
+<p>This will give you the output of the form that you just created.</p>
+<figure>
+<img src="images/create.png" alt="local_to_real_nodes" />
+<figcaption aria-hidden="true">local_to_real_nodes</figcaption>
+</figure>
+<p>Congratulations you have just created your first widget. Now this
+widget does nothing so we have to change that. Firstly you need to add
+events to this form . So we have created an aptly named function in the
+widget that is named addEvents().</p>
+<p>You can add all your user events on this function. So lets do that.
+Suppose we are creating a new composition called &#x201C;the_phonebook&#x201D;. Then
+you will have to create this data structure in the freeschema data
+fabric using three inbuilt functions.</p>
+<pre><code>// this function is used to create a concept. Here type is the type of the concept
+// for example first_name is the type in the relation first_name: harry
+// harry is the referent/value.
+// composition is the flag that determines wether the value will be unique or not 
+// userId is the userId that the user has who creates this concept.
+// accessId is the level of access you want this concept to have. 4 being its just accessible by you.
+
+function MakeTheInstanceConceptLocal(type: string, referent: string, composition: boolean | undefined, userId: number, accessId: number, sessionInformationId?: number, referentId?: number): Promise&lt;Concept&gt;;</code></pre>
+<pre><code>// this is to create the connection between two concepts.
+// think of this as a connecting link between the two data points.
+
+function CreateTheConnectionLocal(ofTheConceptId: number, toTheConceptId: number, typeId: number, orderId?: number, typeString?: string, userId?: number): Promise&lt;Connection&gt;;</code></pre>
+<pre><code>// this is used to sync our local data to the cloud for permanent storage.
+LocalSyncData.SyncDataOnline(): Promise&lt;Concept[]&gt;;</code></pre>
+<p>With all of that in mind we will then start creating data and
+persisting them from here.</p>
+<p>Now we are here to create data</p>
+<p>we need to add events to the form. There is a submit button there so
+we will add event just on the submit button. So now on submit button
+click we are getting the value from name form element and phone form
+element and then pushing those into a data we are also then creating
+concepts and connections from it.</p>
+<pre><code>    /**
+     * These are the events that user adds. These could be any thing like populating the data to creating the data
+     * 
+     */
+    addEvents(): void {
+        let name = this.getElementById(&quot;name&quot;) as HTMLInputElement;
+        let phone = this.getElementById(&quot;phone&quot;) as HTMLInputElement;
+        let id = this.getElementById(&quot;id&quot;) as HTMLInputElement;
+        if(this.data){
+            name.value = this.data.name;
+            phone.value = this.data.phone;
+            id.value = this.data.id;
+        }
+        let submitButton = this.getElementById(&quot;submit&quot;);
+        submitButton.onclick = (ev: Event) =&gt; {
+            ev.preventDefault();
+
+            /**
+             * We are trying to create a data such as 
+             * {
+             *  &quot;the_phonebook&quot;: {
+             *          &quot;name&quot;: xyz,
+             *          &quot;phone&quot;: 9851185938
+             *      }
+             * }
+             * 
+             * you could also alternatively call CreateTheCompositionLocal which rids you from creating 
+             * individual concept and connection.
+             */
+
+            MakeTheInstanceConceptLocal(&quot;the_phonebook&quot;, &quot;&quot;, true,999,4).then((mainconcept)=&gt; {
+                MakeTheInstanceConceptLocal(&quot;name&quot;, name.value,false, 10267, 4).then((concept)=&gt;{
+                    MakeTheInstanceConceptLocal(&quot;phone&quot;, phone.value, false, 999,4).then((concept2) =&gt; {
+                        CreateTheConnectionLocal(mainconcept.id, concept.id, mainconcept.id, 1, &quot;&quot;, 999).then(()=&gt;{
+                            CreateTheConnectionLocal(mainconcept.id, concept2.id, mainconcept.id, 1, &quot;&quot;, 999).then(()=&gt;{
+                                LocalSyncData.SyncDataOnline();
+                            })
+                        })
+                    });
+                });
+            });
+            
+        }
+    }</code></pre>
+<h2 id="installation">Installation</h2>
+<p>Installation of Freeschema Frontend.</p>
+<p>Freeschema is a multi layered system but can be developed with a
+single package called Freeschema Frontend. This is available in github
+as https://github.com/Mentor-Friends/Freeschema-Frontend.</p>
+<p>The Freeschema has different layers like permanent store, data layer,
+distribution layer then frontend layer.</p>
+<p>This Frontend layer is designed so that we can create an Single page
+application using our knowledge of javascript. With just javascript and
+the knowledge of freeschema we can create a complex website. That is the
+strength of freeschema.</p>
+<p>To start using freeschema</p>
+<pre><code>git clone https://github.com/Mentor-Friends/Freeschema-Frontend 
+
+// then afterwards install all the packages using npm install
+npm install </code></pre>
+<h2 id="lifecycle">Lifecycle</h2>
+<p>Lifecycle of Stateful Widget</p>
+<p>This is the lifecycle of a stateful widget.</p>
+<p>Each widget has a lifecycle. Currently we have Mounting and
+Updating.</p>
+<p>Mounting is Putting the widget in the DOM.</p>
+<p>In Stateful widget you need to define a function called getHtml()
+which will return a Promise<string>. The html that is defined in this
+getHtml() section is rendered.</p>
+<p>If there is any data that needs to be added to this widget the best
+place to call it is in componentDidMount(). Currently we need to add
+this.render() inside of the beforeMount() once the data has been
+loaded.</p>
+<p>addEvents() is called when the widget has been added to DOM.</p>
+<h2 id="login">Login</h2>
+<p>Before starting anything we must be able to authenticate into the
+system. Freeschema is a user specefic system. Here each user has
+different data and access levels. This helps us scale up without adding
+any big logic for discerning user access. It is very important because
+this gives us individual connection/ concept level access for each
+user.</p>
+<p>Now let us create a widget for login that we can use for
+authentication.</p>
+<pre><code>import { LoginToBackend } from &quot;mftsccs-browser&quot;;
+import { StatefulWidget } from &quot;../../default/StatefulWidget&quot;;
+import { saveTolocalStorage } from &quot;./login.service&quot;;
+
+export class login extends StatefulWidget{
+//// you logic will go here.
+}</code></pre>
+<p>Here we created a widget using the StatefulWidget which you will get
+to learn very soon.</p>
+<p>In this class we need to define three functions.</p>
+<p>getHtml() : This function will give us the html for the widget.</p>
+<pre><code>    /**
+     * This is the main html component of our creating widget.
+     * @returns returns a form that takes in name and number for the phone book.
+     */
+        async getHtml(): Promise&lt;string&gt; {
+            let html = &quot;&quot;;
+            html = `&lt;div&gt;
+            &lt;form&gt;
+                &lt;div&gt;
+                    &lt;input type = text id=&quot;email&quot; placeholder=&quot;email&quot;&gt;
+                    &lt;input type = password id=&quot;password&quot; placeholder=&quot;password&quot;&gt;
+                    &lt;button id=&quot;submit&quot;&gt;Submit&lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/form&gt;
+    
+            &lt;/div&gt;`
+            return html;
+        }</code></pre>
+<p>addEvents() : This is a StatefulWidget specefic function that can be
+used to add the logic after the html has been rendered.</p>
+<p>Here you can use LoginToBackend(email, password) function to get the
+output response and save them to local storage.</p>
+<p>In the saveToLocalStorage() function there is another function inside
+of it that stores the authentication information to freeschema.</p>
+<pre><code>    /**
+     * These are the events that user adds. These could be any thing like populating the data to creating the data
+     * 
+     */
+        addEvents(): void {
+            let email = this.getElementById(&quot;email&quot;) as HTMLInputElement;
+            let password = this.getElementById(&quot;password&quot;) as HTMLInputElement;
+            let submitButton = this.getElementById(&quot;submit&quot;);
+            console.log(&quot;this is the submit button eventeer&quot;, submitButton);
+            submitButton.onclick = (ev: Event) =&gt; {
+                ev.preventDefault();
+    
+                console.log(&quot;this is the login clicked&quot;);
+                LoginToBackend(email.value, password.value).then((output: any)=&gt;{
+                    console.log(&quot;This is the value&quot;, output);
+                    saveTolocalStorage(output);
+                })
+                
+            }
+        }
+</code></pre>

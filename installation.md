@@ -1,6 +1,4 @@
-## # Installation
-
-
+## Installation
 
 Installation of Freeschema Frontend.
 

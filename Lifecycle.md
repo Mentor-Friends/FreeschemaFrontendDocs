@@ -1,6 +1,4 @@
-## # Lifecycle
-
-
+## Lifecycle
 
 Lifecycle of Stateful Widget
 
