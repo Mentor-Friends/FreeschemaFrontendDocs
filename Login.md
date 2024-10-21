@@ -1,3 +1,7 @@
+# Login
+
+
+
 Before starting anything we must be able to authenticate into the system. Freeschema is a user specefic system. Here each user has different data and access levels. This helps us scale up without adding any big logic for discerning user access. It is very important because this gives us individual connection/ concept level access for each user.
 
 
