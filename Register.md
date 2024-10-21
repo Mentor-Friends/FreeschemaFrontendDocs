@@ -11,20 +11,11 @@ You need to first register you user into the concept connection system. This can
             email: email.value,
             password: password.value
         }
-        console.log("this is the login clicked");
         Signup(signupData).then((output: any)=>{
             console.log("This is signup complete", output);
         })
             
 ```
-
-
-
-
-
-
-
-
 
 
 
@@ -73,7 +64,7 @@ export class register extends StatefulWidget{
      * This is the main html component of our creating widget.
      * @returns returns a form that takes in name and number for the phone book.
      */
-        async getHtml(): Promise<string> {
+         getHtml(): string {
             let html = "";
             html = `<div>
             <form>

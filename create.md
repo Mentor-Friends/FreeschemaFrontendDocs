@@ -26,7 +26,7 @@ export class create extends StatefulWidget{
      * This is the main html component of our creating widget.
      * @returns returns a form that takes in name and number for the phone book.
      */
-    async getHtml(): Promise<string> {
+     getHtml(): string {
         let html = "";
         html = `<div>
         <form>

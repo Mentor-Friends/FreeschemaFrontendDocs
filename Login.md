@@ -33,7 +33,7 @@ getHtml() : This function will give us the html for the widget.
      * This is the main html component of our creating widget.
      * @returns returns a form that takes in name and number for the phone book.
      */
-        async getHtml(): Promise<string> {
+         getHtml(): string {
             let html = "";
             html = `<div>
             <form>
