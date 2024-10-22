@@ -21,30 +21,20 @@ A **Type Concept** is a foundational concept that defines a category or class of
 
 **Key Points:**
 
-* **Category (left corner):** The category or class to which this type belongs.  
-* **Concept ID (center):** A unique identifier for the type concept in the system.  
-* **Subtype (top):** The specific name of the type, such as "Person" or "Product."  
-* **Referent (right corner):** Always null, as type concepts do not represent specific instances.
+  * **Category (left corner):** The category or class to which this type belongs.  
+  * **Concept ID (center):** A unique identifier for the type concept in the system.  
+  * **Subtype (top):** The specific name of the type, such as "Person" or "Product."  
+  * **Referent (right corner):** Always null, as type concepts do not represent specific instances.
 
-  #### 
-
-  **Visual Representation:**
 
 **Code Example:**
-
+```typescript
 MakeTheTypeConceptLocal(
-
   typeString: string,     // The name of the type (e.g., 'Person')
-
   sessionId: number,      // The current session ID
-
   sessionUserId: number,  // The user ID who is creating or managing the session
-
   userId: number          // The user ID creating the type concept
-
 );
-
-**Visual Representation:**
 
 * **Category (left corner)**: **the** — this type belongs to a general category called "the\_."  
 * **Concept ID (center)**: this is the system's unique identifier for the type "the\_Person."  
