@@ -1,3 +1,7 @@
+## Wrapper (Multiple Widgets inside One Widget)
+
+
+
 We now have a create and list section but both are in different web pages. Let's suppose we want to keep them side  by side and once the new data is created we need to list it in the list component.
 
 This needs that both of them are placed in the same component. This will help you manage all of your widgets from a single  page then you need this.
@@ -64,6 +68,10 @@ We have to assign each widget to the wrapper it is associated with.
          
     }
 ```
+
+
+
+<b>Above you can also see that we have called an updateChildData function on listing. This is helpful in the update section ahead. But what this does is that on any data change in the listing widget it will notify the creating widget. This is useful if the two widget's data is linked. In this case if the edit/view button in the widget is clicked then that widget will update its data which will also change the value in the creating widget.</b>
 
 
 
