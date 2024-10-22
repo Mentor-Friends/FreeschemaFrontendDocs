@@ -67,16 +67,19 @@ In the saveToLocalStorage() function there is another function inside of it that
             let password = this.getElementById("password") as HTMLInputElement;
             let submitButton = this.getElementById("submit");
             console.log("this is the submit button eventeer", submitButton);
-            submitButton.onclick = (ev: Event) => {
-                ev.preventDefault();
-    
-                console.log("this is the login clicked");
-                LoginToBackend(email.value, password.value).then((output: any)=>{
-                    console.log("This is the value", output);
-                    saveTolocalStorage(output);
-                })
-                
+            if(submitButton){
+                submitButton.onclick = (ev: Event) => {
+                    ev.preventDefault();
+        
+                    console.log("this is the login clicked");
+                    LoginToBackend(email.value, password.value).then((output: any)=>{
+                        console.log("This is the value", output);
+                        saveTolocalStorage(output);
+                    })
+                    
+                }
             }
+
         }
 
 ```

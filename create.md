@@ -126,35 +126,28 @@ we need to add events to the form. There is a submit button there so we will add
             id.value = this.data.id;
         }
         let submitButton = this.getElementById("submit");
-        submitButton.onclick = (ev: Event) => {
-            ev.preventDefault();
-
-            /**
-             * We are trying to create a data such as 
-             * {
-             *  "the_phonebook": {
-             *          "name": xyz,
-             *          "phone": 9851185938
-             *      }
-             * }
-             * 
-             * you could also alternatively call CreateTheCompositionLocal which rids you from creating 
-             * individual concept and connection.
-             */
-
-            MakeTheInstanceConceptLocal("the_phonebook", "", true,999,4).then((mainconcept)=> {
-                MakeTheInstanceConceptLocal("name", name.value,false, 10267, 4).then((concept)=>{
-                    MakeTheInstanceConceptLocal("phone", phone.value, false, 999,4).then((concept2) => {
-                        CreateTheConnectionLocal(mainconcept.id, concept.id, mainconcept.id, 1, "", 999).then(()=>{
-                            CreateTheConnectionLocal(mainconcept.id, concept2.id, mainconcept.id, 1, "", 999).then(()=>{
-                                LocalSyncData.SyncDataOnline();
+        if(submitButton){
+            submitButton.onclick = (ev: Event) => {
+                ev.preventDefault();
+               MakeTheInstanceConceptLocal("the_phonebook", "", true,999,4).then((mainconcept)=> {
+                    console.log("this is for the sync", mainconcept);
+                    MakeTheInstanceConceptLocal("name", name.value,false, 10267, 4).then((concept)=>{
+                        MakeTheInstanceConceptLocal("phone", phone.value, false, 999,4).then((concept2) => {
+                            CreateTheConnectionLocal(mainconcept.id, concept.id, mainconcept.id, 1, "", 999).then(()=>{
+                                CreateTheConnectionLocal(mainconcept.id, concept2.id, mainconcept.id, 1, "", 999).then(()=>{
+                                    LocalSyncData.SyncDataOnline();
+                                })
                             })
-                        })
+                        });
                     });
-                });
-            });
-            
+                }).catch((err)=>{
+                    console.error("this is the error", err);
+                })
+    
+                
+            }
         }
+
     }
 ```
 
