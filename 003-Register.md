@@ -35,6 +35,8 @@ You can also use the widget system to integrate it to our system
 
 
 ```
+// src/app/pages/user/register.example.ts
+
 import { Signup, SignupModel } from "mftsccs-browser";
 import { StatefulWidget } from "../../default/StatefulWidget";
 

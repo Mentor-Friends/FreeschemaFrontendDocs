@@ -5,6 +5,8 @@
 To Create inside of a widget system you have to first create an html for the form.
 
 ```
+// src/app/pages/example/create.example.ts
+
 import { StatefulWidget } from "../../default/StatefulWidget";
 
 export class create extends StatefulWidget{

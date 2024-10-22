@@ -11,6 +11,8 @@ Now let us create a widget for login that we can use for authentication.
 
 
 ```
+// src/app/pages/user/login.example.ts
+
 import { LoginToBackend } from "mftsccs-browser";
 import { StatefulWidget } from "../../default/StatefulWidget";
 import { saveTolocalStorage } from "./login.service";
