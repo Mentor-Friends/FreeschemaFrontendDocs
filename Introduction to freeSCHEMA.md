@@ -35,6 +35,7 @@ MakeTheTypeConceptLocal(
   sessionUserId: number,  // The user ID who is creating or managing the session
   userId: number          // The user ID creating the type concept
 );
+```
 
 * **Category (left corner)**: **the** — this type belongs to a general category called "the\_."  
 * **Concept ID (center)**: this is the system's unique identifier for the type "the\_Person."  
@@ -52,40 +53,31 @@ MakeTheTypeConceptLocal(
 * **Referent (right-hand side of the triangle):** The actual value represented by the instance concept (e.g., "Harry").
 
 **Code Example:**
-
+```typescript
 MakeTheInstanceConceptLocal(
-
   type: string,           // Type of concept (e.g., 'Person')
-
   referent: string,       // The specific instance (e.g., 'Harry')
-
   composition: boolean,   // Whether the concept is compositional or not
-
   userId: number,         // ID of the user creating the concept
-
   accessId: number        // Access level
-
 );
+```
 
 **Instance concept can also be of two types:**
 
 ##### **i) Instance Value Concept:** An Instance Value Concept is unique and created only once for each combination of type and character value. For example, there can be only one instance of **Person** with the value "**Harry**", ensuring each instance is distinct within the system.
 
+**Code Example:**
+```typescript
  MakeTheInstanceConceptLocal(
-
     "Person",     // Type of concept (e.g., 'Person')
-
     "Harry",      // The specific value (e.g., 'Harry')
-
     false,        // Not compositional
-
     userId,       // User ID creating the instance
-
     4             // Access level 
-
 );
+```
 
-**Visual Representation:**	
 
 #### 
 
@@ -93,23 +85,16 @@ MakeTheInstanceConceptLocal(
 
 An **Instance Compositional Concept** is a more complex structure that can contain other **value concepts**. It’s similar to an object in **Object-Oriented Programming (OOP)**, where a single object can hold multiple attributes or other objects. Typically, these concepts have an empty character value (`""`) and may have a **referent ID** of 0, indicating that they serve as containers for other concepts. This is useful for representing more complex data structures, like a **"Person"** containing details such as **name**, **address**, and **email** each represented as separate concepts.
 
+**Code Example:**
+```typescript
 MakeTheInstanceConceptLocal(
-
     "Person",   // Type of concept (e.g., 'Person')
-
     "",          // No direct value (compositional)
-
     true,        // This is a compositional concept
-
     userId,      // User ID creating the instance
-
     4            // Access level
-
 );
-
-	
-
-	**Visual Representation**
+```
 
 ## 
 
@@ -122,20 +107,15 @@ MakeTheInstanceConceptLocal(
 Connections define relationships between concepts. These relationships allow for scalable data management. For example, a connection might define the relationship between a "User" and a "Product" they purchased.
 
 **Code Example:**
-
+```typescript
 CreateConnectionBetweenTwoConcepts(
-
     ofTheConcept: Concept,
-
     toTheConcept: Concept,
-
     linker: string,
-
     both?: boolean,        
-
     count?: boolean 
-
 ); 
+```
 
 - **ofTheConcept:** The object representing the starting concept (e.g., a person).  
 - **toTheConcept:** The object representing the concept being connected (e.g., a product).  
@@ -148,11 +128,15 @@ CreateConnectionBetweenTwoConcepts(
 
   A Data Connection is a straightforward relationship between two distinct concepts. For instance, if you have a concept for "John Doe" (as a person) and "Laptop" (as a product), a connection can be created to describe that "John Doe" purchased a "Laptop."  
     
+  
+  **Code Example:**
+  ```typescript
   CreateConnectionBetweenTwoConcepts(  
       personConcept,  // John Doe's concept object  
       productConcept, // Laptop's concept object  
       "Purchased"     // Describes the relationship  
   );
+  ```
 
 
 In this example:
@@ -165,36 +149,21 @@ In this example:
 
    Compositional connections are used to define detailed, complex ideas by grouping related data into a single, cohesive structure. A composition is an instance of a type and is used to describe something like a person, object, or entity in detail. For example, the composition for a person could include their name, address, email and other defining properties.
 
-   
-
-   
-
+    
+**Code Example:**
+```typescript
    let personComposition \= {
-
        'Person' : {
-
         'Name': 'John Doe',
-
         'Address': {
-
            'Country': 'USA',
-
            'City': 'New York'
-
         },
-
         'Email' : 'johndoe@gmail.com'
-
       } 
-
    };
 
    makeComposition(personComposition, userId);
-
-   
-
-   
+```  
 
    In this case, the composition groups several related data points ‘Name’, ‘Address’, and ‘Email’ to describe the "Person" entity (John Doe) comprehensively. Compositional concepts are more complex and allow the representation of an entity that holds multiple properties under a single concept.
-
-**Visual Representation:**  
