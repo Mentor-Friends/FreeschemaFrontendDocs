@@ -65,7 +65,7 @@ MakeTheInstanceConceptLocal(
 
 **Instance concept can also be of two types:**
 
-##### **i) Instance Value Concept:** An Instance Value Concept is unique and created only once for each combination of type and character value. For example, there can be only one instance of **Person** with the value "**Harry**", ensuring each instance is distinct within the system.
+**i) Instance Value Concept:** An Instance Value Concept is unique and created only once for each combination of type and character value. For example, there can be only one instance of **Person** with the value "**Harry**", ensuring each instance is distinct within the system.
 
 **Code Example:**
 ```typescript
@@ -81,7 +81,7 @@ MakeTheInstanceConceptLocal(
 
 #### 
 
-##### **ii) Instance Compositional Concept:** 
+**ii) Instance Compositional Concept:** 
 
 An **Instance Compositional Concept** is a more complex structure that can contain other **value concepts**. It’s similar to an object in **Object-Oriented Programming (OOP)**, where a single object can hold multiple attributes or other objects. Typically, these concepts have an empty character value (`""`) and may have a **referent ID** of 0, indicating that they serve as containers for other concepts. This is useful for representing more complex data structures, like a **"Person"** containing details such as **name**, **address**, and **email** each represented as separate concepts.
 
@@ -95,8 +95,6 @@ MakeTheInstanceConceptLocal(
     4            // Access level
 );
 ```
-
-## 
 
 ## 
 
@@ -141,13 +139,13 @@ CreateConnectionBetweenTwoConcepts(
 
 In this example:
 
-1. **personConcept:** Represents the instance concept for "John Doe" (type: "the\_Person").  
-   2. **productConcept:** Represents the instance concept for "Laptop" (type: "the\_Product").  
-   3. **"Purchased":** This string describes the connection or relationship between these two concepts.
+  1. **personConcept:** Represents the instance concept for "John Doe" (type: "the\_Person").  
+  2. **productConcept:** Represents the instance concept for "Laptop" (type: "the\_Product").  
+  3. **"Purchased":** This string describes the connection or relationship between these two concepts.
 
-   ### **2.2 Compositions Connections**
+  ### **2.2 Compositions Connections**
 
-   Compositional connections are used to define detailed, complex ideas by grouping related data into a single, cohesive structure. A composition is an instance of a type and is used to describe something like a person, object, or entity in detail. For example, the composition for a person could include their name, address, email and other defining properties.
+  Compositional connections are used to define detailed, complex ideas by grouping related data into a single, cohesive structure. A composition is an instance of a type and is used to describe something like a person, object, or entity in detail. For example, the composition for a person could include their name, address, email and other defining properties.
 
     
 **Code Example:**
@@ -166,4 +164,4 @@ In this example:
    makeComposition(personComposition, userId);
 ```  
 
-   In this case, the composition groups several related data points ‘Name’, ‘Address’, and ‘Email’ to describe the "Person" entity (John Doe) comprehensively. Compositional concepts are more complex and allow the representation of an entity that holds multiple properties under a single concept.
+  In this case, the composition groups several related data points ‘Name’, ‘Address’, and ‘Email’ to describe the "Person" entity (John Doe) comprehensively. Compositional concepts are more complex and allow the representation of an entity that holds multiple properties under a single concept.
