@@ -1,4 +1,1 @@
-The order of this document is 
-
-
-
+Freeschema is a semantic database system that lets us create 
