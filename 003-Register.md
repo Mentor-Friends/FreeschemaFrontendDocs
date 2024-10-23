@@ -32,6 +32,9 @@ Here the response will be where data is the userId of the regsitered user and re
 
 You can also use the widget system to integrate it to our system
 
+* UserId is the Identifier that is assigned to you. Here data is the userId.
+* UserConceptId is the reference to that userId in the concept format. Here relatedData is the userConceptId.
+
 
 
 ```
@@ -86,4 +89,4 @@ export class register extends StatefulWidget{
 }
 ```
 
-After you do this do not forget to register it.
+After you do this do not forget to register it in routes. In this example we have named it /register.

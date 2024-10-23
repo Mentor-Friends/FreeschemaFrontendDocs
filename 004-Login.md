@@ -86,3 +86,4 @@ In the saveToLocalStorage() function there is another function inside of it that
 
 ```
 
+After you do this do not forget to register it in routes. In this example we have named it /login.
