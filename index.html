@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-
+    <link rel="icon" type="image/x-icon" href="/images/logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Lightweight client-side loader that feature-detects and load polyfills only when necessary -->
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2/webcomponents-loader.min.js"></script>
@@ -34,7 +34,7 @@
 }
 
 /* Style the sidenav links and the dropdown button */
-.sidenav a, .dropdown-btn, h2 {
+.sidenav a, .dropdown-btn {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   color: #818181;
@@ -80,13 +80,49 @@
 zero-md{
     margin-bottom: 100px;
 }
+.logo-wrapper{
+    justify-content: center;
+    float: left;
+    margin-left: 5%;
+    width: 15%;
+}
+.logo-wrapper > img{
+    height: 100%;
+    width:100%;
+}
+.logo-text-wrapper{
+    float:left;
+    width: 80%;
+}
+
+.clearfix {
+  overflow: auto;
+}
+.sidebar-logo-wrapper{
+    padding-bottom: 30px;
+}
+
+.logo-align{
+    color: #818181;
+    padding-left: 5px;
+}
     </style>
 </head>
 
 <body>
 
     <div class="sidenav">
-        <h2>Freeschema Docs</h2>
+        <div class="sidebar-logo-wrapper clearfix">
+            <div class="logo-wrapper">
+                <img src="/images/logo.png">
+            </div>
+            <div class="logo-text-wrapper">
+                <h2 class="logo-align">Freeschema</h2>
+                <span class="logo-align">Documentation v0.1</span>
+
+            </div>
+        </div>
+
         <button class="dropdown-btn">Basics
             <i class="fa fa-caret-down"></i>
           </button>
@@ -95,15 +131,33 @@ zero-md{
             <a href="#concept">Concept</a>
             <a href="#connection">Connection</a>
           </div>
-        <a href="#architecture">Architecture</a>
+          <button class="dropdown-btn">Architecture
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-container">
+            <a href="#architecture">Architecture</a>
+            <a href="#memorytree"> Memory Tree</a>
+          </div>
         <a href="#installation">Installation</a>
         <a href="#structure">Structure</a>
-        <a href="#register">Register</a>
-        <a href="#login">Login</a>
-        <a href="#create">Create Data</a>
-        <a href="#list">List Data</a>
-        <a href="#wrapper">Combine Widgets</a>
-        <a href="#update">Update Data</a>
+        <button class="dropdown-btn">Authentication
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-container">
+            <a href="#register">Register</a>
+            <a href="#login">Login</a>
+          </div>
+
+        <button class="dropdown-btn">Phonebook Example
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-container">
+            <a href="#create">Create Data</a>
+            <a href="#list">List & Delete</a>
+            <a href="#wrapper">Combine Widgets</a>
+            <a href="#update">Update Data</a>
+          </div>
+
       </div>
     <div class="main-content">
         <div class="container">
@@ -112,6 +166,7 @@ zero-md{
             <zero-md id="concept" src="Concept.md"></zero-md>
             <zero-md id="connection" src="Connection.md"></zero-md>
             <zero-md id="architecture" src="000-Architecture.md"></zero-md>
+            <zero-md id="memorytree" src="010-MemoryTree.md"></zero-md>
             <zero-md id="installation" src="001-installation.md"></zero-md>
             <zero-md id="structure" src="002-Folder Structure.md"></zero-md>
             <zero-md id="register" src="003-Register.md"></zero-md>

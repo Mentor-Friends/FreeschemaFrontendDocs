@@ -7,7 +7,7 @@ We have structures that define user, images, charactes, numbers etc. But these a
 
 Basically Freeschema interacts within itself in graph notations(i.e concepts and connections)
 
-![local_to_real_nodes](./images/Freeschema-architecture.svg)
+![local_to_real_nodes](images/Freeschema-architecture.svg)
 
 
 * Layer 0(Permanent Store Layer) : Here Layer 0 is the permanent data store. This is where all the final data resides in disk.
