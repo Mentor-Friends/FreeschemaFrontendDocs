@@ -23,3 +23,11 @@ npm install
 // now you can run freeschema
 npm run dev
 ```
+
+
+
+Currently this framework is not installed by any script and installed by git. Since any person developing in this framework will not have access to the main Freeschema-Frontend git repository. You need to delete the .git folder inside of this project and create your own git repository.
+
+To do this just go to the folder inside Freeschema-Frontend and delete the .git folder present there.
+
+You can initialize your own repository after that.
