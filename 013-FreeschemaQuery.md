@@ -26,7 +26,7 @@ We could do this by creating a query
         let freeschemaQuery: FreeschemaQuery = new FreeschemaQuery();
         freeschemaQuery.type = "the_item";
         freeschemaQuery.name = "top";
-        freeschemaQuery.freeschemaQueries = [entityWidgetCode];
+        freeschemaQuery.freeschemaQueries = [nameConnection];
         freeschemaQuery.selectors = ["the_item_price","the_item_category", "the_item_s_image", "the_item_number","the_item_department","the_item_expire"]
 
         freeschemaQuery.outputFormat = NORMAL;
