@@ -46,7 +46,7 @@ Again we need to then mount the child widgets inside of it. So we call another f
 We have to assign each widget to the wrapper it is associated with. 
 
 ```
-    mountChildWidgets(){
+    mount_child(){
         let widget1 = this.getElementById("widget1");
         let widget2 = this.getElementById("widget2");
         let creating =new create();

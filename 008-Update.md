@@ -14,7 +14,7 @@ So let's do that . First we must add a button in the list widget to incorporate 
           </tr>
 ```
 
-Again After we have updated the html section we will need to update the addEvents() section also to add  the button.
+Again After we have updated the html section we will need to update the after_render() section also to add  the button.
 
 
 
@@ -51,14 +51,14 @@ Now your phonebook widget should look like this.
 
 Now after you have the Edit button and once you click it it will update the create widget.
 
-In the create widget we need to update the addEvents section in the create widget
+In the create widget we need to update the after_render section in the create widget
 
 ```
 import { CreateTheConnectionLocal, LocalSyncData, MakeTheInstanceConceptLocal, PatcherStructure, UpdateComposition } from "mftsccs-browser";
 
 ....
 
-    addEvents(): void {
+    after_render(): void {
         let userId:number = getLocalUserId();
         let order: 1;
         let name = this.getElementById("name") as HTMLInputElement;

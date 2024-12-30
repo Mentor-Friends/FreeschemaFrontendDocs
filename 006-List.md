@@ -19,7 +19,7 @@ export class list extends StatefulWidget{
     page: number = 1;
 
 
-    widgetDidMount(): void {
+    before_render(): void {
         let userId: number = getLocalUserId();
         GetCompositionListListener("the_phonebook", userId, this.inpage, this.page, NORMAL).subscribe((output: any)=>{
             this.phonebooks = output;
@@ -63,7 +63,7 @@ Once the data is loaded from the GetCompositionListListener function it is popul
 after this data has been loaded we again render the component but now since the data has been loaded we will populate our html with the new data.
 
 ```
-    addEvents() {
+    after_render() {
       let tableElement = this.getElementById("mainbody");
       if(tableElement){
         console.log("this is the element", tableElement);

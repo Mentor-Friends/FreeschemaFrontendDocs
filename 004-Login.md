@@ -53,7 +53,7 @@ getHtml() : This function will give us the html for the widget.
 
 
 
-addEvents() : This is a StatefulWidget specefic function that can be used to add the logic after the html has been rendered.
+after_render() : This is a StatefulWidget specefic function that can be used to add the logic after the html has been rendered.
 
 Here you can use LoginToBackend(email, password) function to get the output response and save them to local storage.
 
@@ -64,7 +64,7 @@ In the saveToLocalStorage() function there is another function inside of it that
      * These are the events that user adds. These could be any thing like populating the data to creating the data
      * 
      */
-        addEvents(): void {
+        after_render(): void {
             let email = this.getElementById("email") as HTMLInputElement;
             let password = this.getElementById("password") as HTMLInputElement;
             let submitButton = this.getElementById("submit");

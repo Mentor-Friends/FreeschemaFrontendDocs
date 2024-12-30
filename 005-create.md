@@ -19,7 +19,7 @@ export class create extends StatefulWidget{
      * Since there is no other data to be fetched then we just render after the component 			has been mounted.
      * If there was certain data you want to populate then you would put it here.
      */
-    widgetDidMount(): void {
+    before_render(): void {
 
         this.render();
     }
@@ -80,7 +80,7 @@ This will give you the output of the form that you just created.
 
 
 
-Congratulations you have just created your first widget. Now this widget does nothing so we have to change that. Firstly you need to add events to this form . So we have created an aptly named function in the widget that is named addEvents().
+Congratulations you have just created your first widget. Now this widget does nothing so we have to change that. Firstly you need to add events to this form . So we have created an aptly named function in the widget that is named after_render().
 
  You can add all your user events on this function. So lets do that. Suppose we are creating a new composition called "the_phonebook". Then you will have to create this data structure in the freeschema data fabric using three inbuilt functions. 
 
@@ -122,7 +122,7 @@ we need to add events to the form. There is a submit button there so we will add
      * These are the events that user adds. These could be any thing like populating the data to creating the data
      * 
      */
-    addEvents(): void {
+    after_render(): void {
         let userId:number = getLocalUserId();
         let order: 1;
         let name = this.getElementById("name") as HTMLInputElement;
