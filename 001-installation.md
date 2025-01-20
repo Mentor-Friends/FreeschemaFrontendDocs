@@ -31,3 +31,6 @@ Currently this framework is not installed by any script and installed by git. Si
 To do this just go to the folder inside Freeschema-Frontend and delete the .git folder present there.
 
 You can initialize your own repository after that.
+
+
+To change the origin, In environment.dev.ts change the https://theta.boomconcole.com to https://boomconsole.com .This will change your origin server. If you do not change it you will have to signup again (if you have your humanizing data / boomconsole login).
