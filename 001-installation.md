@@ -33,4 +33,4 @@ To do this just go to the folder inside Freeschema-Frontend and delete the .git 
 You can initialize your own repository after that.
 
 
-To change the origin, In environment.dev.ts change the https://theta.boomconcole.com to https://boomconsole.com .This will change your origin server. If you do not change it you will have to signup again (if you have your humanizing data / boomconsole login).
+To change the origin, In environment.dev.ts if there is link to theta.boomconcole.com change the https://theta.boomconcole.com to https://boomconsole.com in all three instances of baseURL, baseNodeUrl and boomURL.This will change your origin server. If you do not change it you will have to signup again (if you have your humanizing data / boomconsole login).
