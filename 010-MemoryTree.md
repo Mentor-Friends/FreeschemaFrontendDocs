@@ -26,4 +26,4 @@ Whenever you create a new widget in the system it might or might not have a data
 
 So, Any update on the memory tree will update its corresponding widgets (which are listening to the change via the listener).
 
-This will work with any existing javascript framework like React, Angular albeit with certain modifications.
+This will work with any existing javascript framework like React, Angular albeit with certain modifications. Not all functions in freeschema currently ensure memory tree update but we are updating it as we go.

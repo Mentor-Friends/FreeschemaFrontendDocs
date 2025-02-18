@@ -54,7 +54,7 @@ Let's suppose you want to only filter the items which have name "Software Develo
 
         let itemFilter: FilterSearch = new FilterSearch();
         itemFilter.type= "the_name";
-        itemFilter.search = "Software",
+        itemFilter.search = "Software";
         itemFilter.logicoperator = "like";
         itemFilter.name = "namefilter";
         itemFilter.operateon = "itemname";
@@ -63,7 +63,7 @@ Let's suppose you want to only filter the items which have name "Software Develo
 
         let freeschemaQuery: FreeschemaQuery = new FreeschemaQuery();
         freeschemaQuery.type = "the_item";
-        freeschemaQuery.filterLogic = "( namefilter )"
+        freeschemaQuery.filterLogic = "( namefilter )";
         freeschemaQuery.filters = [itemFilter];
 
         freeschemaQuery.name = "top";
@@ -98,7 +98,7 @@ Filter has certain parameters
         itemFilter.type= "the_name";
         
         // this is the actual value that we are searching for
-        itemFilter.search = "Software",
+        itemFilter.search = "Software";
         
         // this is the operator for the filter.
         itemFilter.logicoperator = "like";
@@ -134,7 +134,7 @@ Let's suppose you want to filter something with department "technical" you could
 
         let itemFilter: FilterSearch = new FilterSearch();
         itemFilter.type= "the_name";
-        itemFilter.search = "Software",
+        itemFilter.search = "Software";
         itemFilter.logicoperator = "like";
         itemFilter.name = "namefilter";
         itemFilter.operateon = "itemname";
@@ -153,7 +153,7 @@ Let's suppose you want to filter something with department "technical" you could
         freeschemaQuery.type = "the_item";
         
         // filter logic is also updated here so that we can do an AND logic
-        freeschemaQuery.filterLogic = "( namefilter AND departmentfilter )"
+        freeschemaQuery.filterLogic = "( namefilter AND departmentfilter )";
         freeschemaQuery.filters = [itemFilter,departmentFilter];
 
         freeschemaQuery.name = "top";
