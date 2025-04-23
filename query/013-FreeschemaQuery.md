@@ -178,3 +178,15 @@ We also have added a department connection filter. After this we receive.
 ![local_to_real_nodes](images/query-output-3.png)
 
 This will help us enable to filter by department and name.
+
+
+
+Freeschemaquery by default gives all the data but there is a property in the freeschema query that allows only your data to be shown when querying by type in the top level freeschema query.
+
+```
+let freeschema = new FreeschemaQuery();
+freeschema.type = "the_entity";
+freeschema.isSecure = true;
+
+```
+This will only show you the data that you have made or the data you have access to.

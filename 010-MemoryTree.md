@@ -1,20 +1,18 @@
 ## Memory Tree
 
-Concept and connection needs to be everywhere for our system to work. For this we have created a memory store in each layer of the concept connection system. This memory store holds concepts and connections which can help us acccess and build data faster from its atomic components. 
+For our system to function effectively, the presence of concepts and their connections is essential throughout. To support this, we’ve implemented a memory store at every layer of the concept-connection architecture. This store retains concepts and connections, enabling us to build and retrieve data more efficiently from its foundational elements.
 
-In each layer this memory tree is useful, more so in the user layer. In the user layer. There is are Balanced Binary Tree that hold concepts and connections for faster access. These concepts and connections can be preloaded via AI or can be manually fetched on each request. The manual fetch might cause the preload time to be greater than intended because on each request the required concepts and connections must be fetched.
+Each layer benefits from this memory structure, particularly the user layer. In this layer, we use Balanced Binary Trees to store concepts and connections for quicker access. These can be preloaded using AI or retrieved manually upon each request. Manual fetching, however, may increase the initial load time, as necessary data must be retrieved every time it's needed.
 
-There are 3 major memory trees right now.
+Currently, there are three key memory trees:
 
-1. Concept Tree - This holds all the concepts as values and id as its key. This helps us find the concept faster just with its concept id. This is our primary memory copy of concept.
+1. Concept Tree: Stores all concepts using their IDs as keys. This serves as the main in-memory reference for concepts, allowing quick lookups by ID.
 
-2. Connection Tree - This holds all the connections as values and id as its key. This helps us find the connection faster with its connection id. This is our primary memory copy of connection.
+2. Connection Tree: Stores all connections with their IDs as keys. Like the Concept Tree, it serves as the primary in-memory source for connections.
 
-3. Connection Of Tree - This holds all references to connection which have the same of_the_concept_id. This helps us get the new updates on the tree for a specific concept.
+3. Connection-Of Tree: Contains references to all connections associated with a specific of_the_concept_id. This tree makes it easy to access the latest updates tied to a particular concept.
 
-
-
-When any of these tree have any kind of update then these will update the widgets and that in turn will update the DOM.
+Whenever any of these trees are updated, the changes automatically propagate to the widgets, which then trigger updates to the DOM.
 
 
 
@@ -22,8 +20,8 @@ When any of these tree have any kind of update then these will update the widget
 
 ![local_to_real_nodes](images/Frontend-Architecture.svg)
 
-Whenever you create a new widget in the system it might or might not have a data listener attached to it. If there is a data listener attached to it then the widget will listen for a concept/ connection event. When you create a new concept that concept is updated in the Local Memory tree and also in the upper data layer. When the Memory tree is updated it will publish an event which will cause the widget to know that it needs to re-render. This re-rendering process in turn updates the DOM. 
+When a new widget is created in the system, it may or may not have a data listener attached. If it does, the widget will listen for events related to concepts or connections. When a new concept is created, it's updated in both the Local Memory Tree and the higher-level data layer. This update triggers the Memory Tree to emit an event, notifying the widget to re-render. As a result, the widget refreshes and the DOM is updated accordingly.
 
-So, Any update on the memory tree will update its corresponding widgets (which are listening to the change via the listener).
+In essence, any change in the memory tree will automatically update the associated widgets that are subscribed to those changes via listeners.
 
-This will work with any existing javascript framework like React, Angular albeit with certain modifications. Not all functions in freeschema currently ensure memory tree update but we are updating it as we go.
+This system is compatible with popular JavaScript frameworks like React and Angular, though some adjustments may be needed. Currently, not all freeschema functions trigger memory tree updates, but improvements are ongoing.

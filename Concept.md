@@ -78,12 +78,12 @@ MakeTheInstanceConceptLocal(
 
 **Instance concept can also be of two types:**
 
-**i) Instance Value Concept:** An Instance Value Concept is unique and created only once for each combination of type and character value. For example, there can be only one instance of **Person** with the value "**Harry**", ensuring each instance is distinct within the system.
+**i) Instance Value Concept:** An Instance Value Concept is unique and created only once for each combination of type and character value. For example, there can be only one instance of **the_first_name** with the value "**Harry**", ensuring each instance is distinct within the system.
 
 **Code Example:**
 ```typescript
  MakeTheInstanceConceptLocal(
-    "Person",     // Type of concept (e.g., 'Person')
+    "the_first_name",     // Type of concept (e.g., 'the_first_name')
     "Harry",      // The specific value (e.g., 'Harry')
     false,        // Not compositional
     userId,       // User ID creating the instance
@@ -93,7 +93,7 @@ MakeTheInstanceConceptLocal(
 
 **Visual Representation**
 
-![local_to_real_nodes](images/instanceValueConceptExampleVisual.png)
+![local_to_real_nodes](images/instance-concept.png)
 
 
 #### 
@@ -105,7 +105,7 @@ An **Instance Compositional Concept** is a more complex structure that can conta
 **Code Example:**
 ```typescript
 MakeTheInstanceConceptLocal(
-    "Person",   // Type of concept (e.g., 'Person')
+    "the_Person",   // Type of concept (e.g., 'the_person')
     "",          // No direct value (compositional)
     true,        // This is a compositional concept
     userId,      // User ID creating the instance
