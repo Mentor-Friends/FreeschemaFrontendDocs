@@ -3,24 +3,37 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/chatbot.css">
     <link rel="icon" type="image/x-icon" href="/images/logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Lightweight client-side loader that feature-detects and load polyfills only when necessary -->
-<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2/webcomponents-loader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2/webcomponents-loader.min.js"></script>
 
-<!-- Load the element definition -->
-<script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@1/src/zero-md.min.js"></script>
+    <!-- Load the element definition -->
+    <script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@1/src/zero-md.min.js"></script>
+
+    <!-- Title and Meta Data -->
+    <title>Freeschema Documentation</title>
+    <meta name="description" content="Freeschema is a powerful, flexible, and easy-to-use framework for building data-driven applications. It provides a simple way to create, manage, and query data structures, making it ideal for developers looking to build scalable and maintainable applications.">
+    <meta name="keywords" content="Freeschema, documentation, data-driven applications, framework, scalable applications, query data, create data structures, manage data, flexible framework">
+    <meta name="author" content="Freeschema Team"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
+    <meta property="og:title" content="Freeschema Documentation">
+    <meta property="og:description" content="Freeschema is a powerful, flexible, and easy-to-use framework for building data-driven applications. It provides a simple way to create, manage, and query data structures, making it ideal for developers looking to build scalable and maintainable applications.">
+    <meta property="og:image" content="/images/logo.png">
+    <meta property="og:url" content="https://freeschema.com/documentation">
+    <meta property="og:type" content="website">
+
 <style>
 
     .main-content{
         width: 80%;
         margin-left: 230px;
     }
-</style>
-    <style>
-        /* Fixed sidenav, full height */
+/* Fixed sidenav, full height */
 .sidenav {
   height: 100%;
   width: 200px;
@@ -106,7 +119,39 @@ zero-md{
     color: #818181;
     padding-left: 5px;
 }
-    </style>
+
+#chat-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #a53d65;
+  color: white;
+  border-radius: 30px;
+  padding: 10px 16px 10px 14px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.25);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#chat-icon:hover {
+  background-color: #922f56;
+  transform: scale(1.05);
+}
+
+.chat-label {
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+
+  </style>
 </head>
 
 <body>
@@ -248,7 +293,42 @@ zero-md{
             <zero-md id="visualization" src="012-Visualization.md"></zero-md>
             </div>
     </div>
+    
+    <!-- The container where the widget will be rendered -->
+    <div id="visualContainer" style="display:none;"></div>
+    
+    <!-- Floating Chat Icon -->
+    <div id="chat-icon">
+      <span class="chat-label">Ask AI</span>
+      <i class="fa fa-comment"></i>
+    </div>
+    
+    
+    <div class="app-container" style="display: none;">
+        <div class="main-pane">
+            <div class="chat-widget">
+                <div class="chat-header">
+                    <h3>✨ Assistant</h3>
+                </div>
+
+                <div class="chat-body" id="chatBody" >
+                  
+                </div>
+
+                <div class="chat-footer">
+                    <div class="input-wrapper">
+                        <textarea class="chat-input" id="chatInput" placeholder="Type a message..." rows="2"></textarea>
+                        <button class="send-button" id="sendButton" title="Send"><span class="arrow-icon"> ➤</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/chatbot.js"></script>
+
 </body>
+
 
 
 
@@ -265,5 +345,7 @@ zero-md{
             }
         });
     });
+
 </script>
+
 </html>
