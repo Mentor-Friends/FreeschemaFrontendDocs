@@ -42,17 +42,32 @@ async function sendQuery(text) {
         }
     }
 
-    const url = `https://devai.freeschema.com/api/rag/query?question=${encodeURIComponent(text)}&organization_id=freeschema&context=${encodeURIComponent(JSON.stringify(context))}`;
+    const payload = {
+        question: text,
+        organization_id: 'freeschema',
+        context: JSON.stringify(context)
+    };
+
+    const api_url = 'https://devai.freeschema.com/api/rag/query';
+    // const url = `https://devai.freeschema.com/api/rag/query?question=${encodeURIComponent(text)}&organization_id=freeschema&context=${encodeURIComponent(JSON.stringify(context))}`;
     // const url = `https://devai.freeschema.com/api/rag/query?question=${encodeURIComponent(text)}&organization_id=freeschema`;
-    const resp = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: '',
+    const resp = await fetch(api_url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
     });
     if (!resp.ok) {
     throw new Error(`Server error: ${resp.status}`);
     }
-    const { answer } = await resp.json();
+    const { data } = await resp.json();
+    if (!data || !data.answer) {
+        throw new Error('No answer received from the server');
+    }
+    const answer = data.answer.trim();
+    if (!answer) {
+        throw new Error('Received an empty answer from the server');
+    }
+
     return answer;
 }
 
@@ -62,13 +77,14 @@ sendButton.addEventListener('click', async () => {
     appendMessage(text, 'user');
     chatInput.value = '';
     appendMessage('Thinking...', 'assistant', false);
-
-    const botAnswer = await sendQuery(text);
+    
+    const defaultMessage = "Sorry I could not answer to your question right now, Please try again later.";
+    const botAnswer = await sendQuery(text) || defaultMessage;
     const last = chatBody.lastChild;
     if (last.classList.contains('assistant-message')) {
-    last.textContent = botAnswer;
+        last.textContent = botAnswer;
     } else {
-    appendMessage(botAnswer, 'assistant');
+        appendMessage(botAnswer, 'assistant');
     }
 
     history.push({ sender: 'assistant', text: botAnswer });
