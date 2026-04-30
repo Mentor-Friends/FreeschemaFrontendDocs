@@ -35,6 +35,81 @@ You can initialize your own repository after that.
 
 To change the origin, In environment.dev.ts if there is link to theta.boomconcole.com change the https://theta.boomconcole.com to https://boomconsole.com in all three instances of baseURL, baseNodeUrl and boomURL.This will change your origin server. If you do not change it you will have to signup again (if you have your humanizing data / boomconsole login).
 
+---
+
+## Initializing the system
+
+Before using any Freeschema functionality, call `init()` once at application startup. This sets up the backend connection, loads local data from IndexedDB, and configures all subsystems.
+
+```js
+import { init } from 'mftsccs-browser'
+
+await init(
+    "https://api.example.com",   // url        — backend API base URL (required)
+    "",                           // aiurl      — AI service URL, empty if not used
+    "",                           // accessToken — JWT token, set later via updateAccessToken()
+    "",                           // nodeUrl    — Node.js server URL
+    false,                        // enableAi   — set true to preload AI data
+    "my-app",                     // applicationName — unique name, used for IndexedDB isolation
+)
+```
+
+### Parameters
+
+| Parameter | Type | Default | Description |
+|---|---|---|---|
+| `url` | `string` | `""` | Backend API base URL. Required for all concept and connection operations. |
+| `aiurl` | `string` | `""` | AI service URL. Pass empty string if not using AI features. |
+| `accessToken` | `string` | `""` | JWT bearer token. Can be set later with `updateAccessToken()` after login. |
+| `nodeUrl` | `string` | `""` | Node.js server URL for business logic features. |
+| `enableAi` | `boolean` | `true` | Enable AI data preloading to IndexedDB. Set `false` if not using AI. |
+| `applicationName` | `string` | `""` | Unique app identifier. Creates separate IndexedDB instances per app name. |
+| `enableSW` | `object` | `undefined` | Service worker config: `{ activate: boolean, scope?: string, pathToSW?: string }` |
+| `flags` | `object` | `{}` | Feature flags: `logApplication`, `logPackage`, `accessTracker`, `isTest` |
+| `parameters` | `object` | `{}` | Extra config: `logserver`, `isPwa`, `enableCache` — see below |
+
+### The `parameters` object
+
+```js
+await init(
+    "https://api.example.com", "", "", "", false, "my-app",
+    undefined,
+    {},
+    {
+        logserver:   "https://logs.example.com", // custom log server URL
+        isPwa:       true,                        // enable PWA / offline persistence
+        enableCache: false,                       // disable widget and query caching
+    }
+)
+```
+
+### Full example with service worker
+
+```js
+await init(
+    "https://api.example.com",
+    "https://ai.example.com",
+    "",
+    "https://node.example.com",
+    true,
+    "my-app-v2",
+    { activate: true, scope: "/", pathToSW: "/service-worker.js" },
+    { logApplication: true, accessTracker: true },
+    { logserver: "https://logs.example.com", enableCache: true }
+)
+```
+
+### Updating the access token after login
+
+```js
+import { updateAccessToken, LoginToBackend } from 'mftsccs-browser'
+
+const result = await LoginToBackend("user@example.com", "password")
+updateAccessToken(result.data.token)
+```
+
+See [Cache Control](024-CacheControl.md) for details on the `enableCache` option and runtime cache toggling.
+
 
 
 

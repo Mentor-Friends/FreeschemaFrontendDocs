@@ -72,5 +72,56 @@ If you do not have access to delete the connection then you will get a response 
 
   Now you can add a new Connection and edit the ontology.
 
+---
 
+## Querying connections between concepts
 
+If you need to find which connections exist between concepts before deciding what to delete (or for any other read purpose), use `GetConnectionsBetweenApi`. It accepts an array of queries so multiple lookups go in a single HTTP request.
+
+```js
+import { GetConnectionsBetweenApi, buildFetchConnection } from 'mftsccs-browser'
+
+const results = await GetConnectionsBetweenApi([
+    buildFetchConnection({ ofTheConceptId: 103927382, toTheConceptId: 103927389, type: "the_project_s_page" })
+])
+
+console.log(results[0].connectionIds) // [18161211, ...]
+```
+
+`buildFetchConnection` lets you supply only the fields relevant to your query — unspecified fields default to 0 or empty. The backend resolves the `typeId` from the `type` string automatically.
+
+### Query permutations
+
+| Fields | Returns |
+|---|---|
+| `ofTheConceptId` + `toTheConceptId` + `type` | Connections between two specific concepts of that type |
+| `ofTheConceptId` + `type` | All connections FROM a concept of that type |
+| `toTheConceptId` + `type` | All connections TO a concept of that type |
+| `typeId` + `isComposition: true` | All internal connections of a composition |
+
+---
+
+## Transactional delete
+
+If you need to delete connections as part of a larger atomic operation (e.g. delete old connections and create replacements together), use the transaction API instead of calling `DeleteConnectionById` or `DeleteConnectionByType` directly. This guarantees that either everything succeeds or nothing is changed.
+
+```js
+const transaction = new LocalTransaction()
+try {
+    await transaction.initialize()
+
+    // Queue connections for deletion — nothing happens yet
+    await transaction.DeleteConnectionsBetween({
+        ofTheConceptId: 100821886,
+        type: "the_entity_phone"
+    })
+
+    // Fires as a single bulk delete request on the backend
+    await transaction.commitTransaction()
+
+} catch (err) {
+    transaction.rollbackTransaction() // queue discarded, no deletions
+}
+```
+
+See [Query Transaction](014-QueryTransaction.md) for the full reference including combining creates and deletes in one transaction, and [Transactional Delete](023-TransactionalDelete.md) for all supported query permutations.
